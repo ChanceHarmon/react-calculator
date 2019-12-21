@@ -11,7 +11,8 @@ class App extends Component {
       input: "",
       previousNumber: "",
       currentNumber: "",
-      operator: ""
+      operator: "",
+      memory: 0
     };
   }
 
@@ -36,30 +37,60 @@ class App extends Component {
   }
 
   add = () => {
+    // eslint-disable-next-line
     this.state.previousNumber = this.state.input;
     this.setState({ input: "" });
+    // eslint-disable-next-line
     this.state.operator = "plus";
   }
 
   subtract = () => {
+    // eslint-disable-next-line
     this.state.previousNumber = this.state.input;
     this.setState({ input: "" });
+    // eslint-disable-next-line
     this.state.operator = "subtract";
   }
 
   divide = () => {
+    // eslint-disable-next-line
     this.state.previousNumber = this.state.input;
     this.setState({ input: "" });
+    // eslint-disable-next-line
     this.state.operator = "divide";
   }
 
   multiply = () => {
+    // eslint-disable-next-line
     this.state.previousNumber = this.state.input;
     this.setState({ input: "" });
+    // eslint-disable-next-line
     this.state.operator = "multiply";
+  }
+  memoryClear = () => {
+    this.setState({ memory: 0 });
+  }
+
+  memoryRecall = () => {
+    // eslint-disable-next-line
+    this.state.input = this.state.memory;
+    this.setState({ input: this.state.input });
+  }
+
+  memoryAdd = () => {
+    console.log('memory', this.state.memory, 'input', this.state.input);
+
+    this.setState({ input: this.state.input, memory: parseInt(this.state.memory) + parseInt(this.state.input) })
+  }
+
+  memorySub = () => {
+    // eslint-disable-next-line
+    this.state.memory = this.state.memory - this.state.input;
+    this.setState({ input: this.state.input })
   }
 
   evaluate = () => {
+    // eslint-disable-next-line
     this.state.currentNumber = this.state.input;
     if (this.state.operator === "plus") {
       this.setState({ input: parseFloat(this.state.previousNumber) + parseFloat(this.state.currentNumber) })
@@ -72,11 +103,18 @@ class App extends Component {
     }
   };
 
+
   render() {
     return (<div className="App" >
       <div className="wrapper">
         <div className="row">
           <Input>{this.state.input}</Input>
+        </div>
+        <div className="row">
+          <Button handleClick={this.memoryClear}>MC</Button>
+          <Button handleClick={this.memoryRecall}>MR</Button>
+          <Button handleClick={this.memoryAdd}>M+</Button>
+          <Button handleClick={this.memorySub}>M-</Button>
         </div>
         <div className="row">
           <Button handleClick={this.addToInput}>7</Button>
