@@ -80,13 +80,30 @@ class App extends Component {
   memoryAdd = () => {
     console.log('memory', this.state.memory, 'input', this.state.input);
 
-    this.setState({ input: this.state.input, memory: parseInt(this.state.memory) + parseInt(this.state.input) })
+    this.setState({ input: this.state.input, memory: parseFloat(this.state.memory) + parseFloat(this.state.input) })
   }
 
   memorySub = () => {
+    console.log('memory', this.state.memory, 'input', this.state.input);
     // eslint-disable-next-line
     this.state.memory = this.state.memory - this.state.input;
     this.setState({ input: this.state.input })
+  }
+
+  sqrt = () => {
+    this.setState({ memory: 0 });
+  }
+
+  squared = () => {
+    this.setState({ memory: 0 });
+  }
+
+  pie = () => {
+    this.setState({ memory: 0 });
+  }
+
+  roman = () => {
+    this.setState({ memory: 0 });
   }
 
   evaluate = () => {
@@ -109,6 +126,12 @@ class App extends Component {
       <div className="wrapper">
         <div className="row">
           <Input>{this.state.input}</Input>
+        </div>
+        <div className="row">
+          <Button handleClick={this.sqrt}>√</Button>
+          <Button hendleClick={this.squared}>x^2</Button>
+          <Button handleClick={this.pie}>π</Button>
+          <Button handleClick={this.roman}>III</Button>
         </div>
         <div className="row">
           <Button handleClick={this.memoryClear}>MC</Button>
