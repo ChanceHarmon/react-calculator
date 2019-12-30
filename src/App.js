@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: "",
+      input: 0,
       previousNumber: "",
       currentNumber: "",
       operator: "",
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   addToInput = value => {
-    this.setState({ input: this.state.input + value });
+    this.setState({ input: value });
   };
 
   addZeroToInput = value => {
@@ -33,13 +33,15 @@ class App extends Component {
   }
 
   clearInput = () => {
-    this.setState({ input: "" })
+    this.setState({ input: 0, previousNumber: "", currentNumber: "" })
   }
+
+  // Chance, 12/30- Current UI bug, doesn't track previous and current number correctly, need to fix that, may need to change constructor. Also, need to follow current changes to constructor ie input is no longer a string in all other functions that currently are checking for input to be "" instead of zero
 
   add = () => {
     // eslint-disable-next-line
     this.state.previousNumber = this.state.input;
-    this.setState({ input: "" });
+    this.setState({ input: `${this.state.previousNumber} + ${this.state.input}` });
     // eslint-disable-next-line
     this.state.operator = "plus";
   }
