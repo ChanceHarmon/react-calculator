@@ -9,19 +9,23 @@ class App extends Component {
     super(props);
     this.state = {
       input: 0,
-      previousNumber: "",
-      currentNumber: "",
+      previousNumber: 0,
+      currentNumber: 0,
       operator: "",
       memory: 0
     };
   }
 
   addToInput = value => {
-    this.setState({ input: value });
-  };
+    if (this.state.input !== 0) {
+      this.setState({ input: this.state.input + value })
+    } else {
+      this.setState({ input: value });
+    };
+  }
 
   addZeroToInput = value => {
-    if (this.state.input !== "") {
+    if (this.state.input !== 0) {
       this.setState({ input: this.state.input + value })
     };
   }
@@ -33,15 +37,16 @@ class App extends Component {
   }
 
   clearInput = () => {
-    this.setState({ input: 0, previousNumber: "", currentNumber: "" })
+    this.setState({ input: 0, previousNumber: 0, currentNumber: 0 })
   }
 
-  // Chance, 12/30- Current UI bug, doesn't track previous and current number correctly, need to fix that, may need to change constructor. Also, need to follow current changes to constructor ie input is no longer a string in all other functions that currently are checking for input to be "" instead of zero
+  // Chance, 12/31- Current UI bug, now it displays the operations, but only preforms the first operator action, not any other operations after. Also, need to follow current changes to constructor ie input is no longer a string in all other functions that currently are checking for input to be "" instead of zero
 
   add = () => {
     // eslint-disable-next-line
     this.state.previousNumber = this.state.input;
-    this.setState({ input: `${this.state.previousNumber} + ${this.state.input}` });
+
+    this.setState({ input: `${this.state.previousNumber} + ` });
     // eslint-disable-next-line
     this.state.operator = "plus";
   }
