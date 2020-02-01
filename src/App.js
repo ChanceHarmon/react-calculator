@@ -17,12 +17,18 @@ class App extends Component {
   }
 
   addToInput = value => {
-    if (this.state.input !== 0) {
-      this.setState({ input: this.state.input + value })
-    } else {
-      this.setState({ input: value });
-    };
-  }
+    this.setState({ input: value });
+  };
+
+
+  // addToInput = value => {
+  //   if (this.state.input !== 0) {
+  //     this.setState({ input: this.state.input + value })
+  //   } else {
+  //     this.setState({ input: value });
+  //   };
+  // }
+
 
   addZeroToInput = value => {
     if (this.state.input !== 0) {
@@ -44,11 +50,19 @@ class App extends Component {
 
   add = () => {
     // eslint-disable-next-line
-    this.state.previousNumber = this.state.input;
+    this.setState({
+      previousNumber: this.state.input,
+      operator: "plus",
+    }, (prevState) => {
+      this.setState({
+        input: prevState.previousNumber + prevState.input,
+      })
+    })
+    // this.state.previousNumber = this.state.input;
 
-    this.setState({ input: `${this.state.previousNumber} + ` });
+    // this.setState({ input: `${this.state.previousNumber} + ` });
     // eslint-disable-next-line
-    this.state.operator = "plus";
+    // this.state.operator = "plus";
   }
 
   subtract = () => {
@@ -87,14 +101,14 @@ class App extends Component {
   memoryAdd = () => {
     console.log('memory', this.state.memory, 'input', this.state.input);
 
-    this.setState({ input: this.state.input, memory: parseFloat(this.state.memory) + parseFloat(this.state.input) })
+    this.setState({ input: 0, memory: parseFloat(this.state.memory) + parseFloat(this.state.input) })
   }
 
   memorySub = () => {
     console.log('memory', this.state.memory, 'input', this.state.input);
     // eslint-disable-next-line
     this.state.memory = this.state.memory - this.state.input;
-    this.setState({ input: this.state.input })
+    this.setState({ input: 0 })
   }
 
   sqrt = () => {
